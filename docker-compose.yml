@@ -7,3 +7,13 @@ postgresql:
     - PG_PASSWORD=our-awsome-bookstore-app
   volumes:
     - ./tmp/data/postgresql:/postgresql
+
+rails:
+  build: .
+  command: bundle exec rails s -p 5678 -b '0.0.0.0'
+  ports:
+    - 5678:5678
+  volumes:
+    - ./:/usr/src/app
+  links:
+    - postgresql:localhost
